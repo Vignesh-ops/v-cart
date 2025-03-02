@@ -20,17 +20,20 @@ const ChatRoom = () => {
           const msg = JSON.parse(event.data);
           setMessages(prev => [...prev, msg]); // Store entire object
         } catch (error) {
+          alert('err pharsing msg')
           console.error('Error parsing message:', error);
         }
       };
 
       ws.current.onclose = () => {
+        alert('disconnected from server')
         console.log('Disconnected from server, reconnecting in 3s...');
         setTimeout(connectWebSocket, 3000);
       };
 
       ws.current.onerror = (error) => {
         console.error('WebSocket error:', error);
+        alert("websocket error")
       };
     };
 
