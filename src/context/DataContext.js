@@ -11,7 +11,7 @@ import format from "date-fns/format";
 const DataContext = createContext({});
 const URL = window.location.hostname === "localhost"
   ? "http://localhost:8080"
-  : "https://server-production-33bb.up.railway.app"
+  : "https://server-54vw.onrender.com"
 
 const DataProvider = ({ children }) => {
   const navigate = useNavigate()
