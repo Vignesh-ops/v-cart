@@ -14,8 +14,10 @@ import Editpost from './Editpost';
 import Footer from './Footer';
 import Login from './AuthPage/Login';
 import Register from './AuthPage/Register';
+import Layout from './components/Layout'
 import { DataProvider } from './context/DataContext';
-
+import SearchBar from './components/SearchBar';
+import ChatRoom from './components/Chat';
 
 
 function App() {
@@ -23,23 +25,29 @@ function App() {
 
   return (
     <div className="App">
-      <DataProvider>    
-         <Header title="Share Zone" />
-        <Nav />
+      <DataProvider>
+        {/* <Header title="Share Zone" /> */}
+        {/* <Nav /> */}
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path='/about' element={<Footer />} />
 
-          <Route path='posts'>
+          <Route path='/' element={<Layout />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/chat/:id' element={<ChatRoom />} />
+
+
+          {/* <Route path='/' element={<Home />} /> */}
+          {/* <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} /> */}
+          {/* <Route path='/about' element={<Footer />} /> */}
+
+          {/* <Route path='posts'>
             <Route index element={<Newpost />} />
             <Route path=':id' element={<Postpage />} />
             <Route path='edit/:id' element={<Editpost />} />
-
-          </Route>
+          </Route> */}
         </Routes>
-        <About />
+        {/* <About /> */}
 
       </DataProvider>
 
