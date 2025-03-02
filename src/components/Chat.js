@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-
+import { useContext } from 'react';
 const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -8,11 +8,15 @@ const ChatRoom = () => {
   const messagesEndRef = useRef(null);
   const { id } = useParams(); 
   const userID = Number(id); 
+  const URL = window.location.hostname === "localhost"
+  ? "ws://localhost:8080"
+  : "wss://server-54vw.onrender.com";
+
+
 
   useEffect(() => {
     const connectWebSocket = () => {
-      ws.current = new WebSocket(`ws://localhost:8080/ws?user_id=${userID}`);
-
+      ws.current = new WebSocket(`${URL}/ws?user_id=${userID}`);
       ws.current.onopen = () => console.log('Connected to WebSocket server');
 
       ws.current.onmessage = (event) => {
@@ -26,14 +30,12 @@ const ChatRoom = () => {
       };
 
       ws.current.onclose = () => {
-        alert('disconnected from server')
         console.log('Disconnected from server, reconnecting in 3s...');
         setTimeout(connectWebSocket, 3000);
       };
 
       ws.current.onerror = (error) => {
         console.error('WebSocket error:', error);
-        alert("websocket error")
       };
     };
 
