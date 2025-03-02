@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import api from '../api/posts'
 import Register from "../AuthPage/Register";
 import Login from "../AuthPage/Login";
+import { useLocation } from "react-router-dom";
 
 import format from "date-fns/format";
 
@@ -16,12 +17,17 @@ const DataProvider = ({ children }) => {
   const navigate = useNavigate()
   // const { data, isloading, fetchError } = useAxiaosFetch(`${URL}/users`);
   let loggeduid = '';
+  const location = useLocation();
 
 
-  const logincheck = async () => {
+  const Logincheck = async () => {
+
+    if (location.pathname === "/register") {
+      return;
+    }
     try {
       const islogged = await api.get(`${URL}/`);
-      console.log("logged successful!",islogged);
+      console.log("logged successful!", islogged);
       if (islogged) {
         navigate("/");
       } else {
@@ -32,9 +38,8 @@ const DataProvider = ({ children }) => {
     }
   }
 
-  useEffect(() => 
-    {
-    logincheck()
+  useEffect(() => {
+    Logincheck()
   }, [])
 
   const handleRegister = async (name, email, password) => {
