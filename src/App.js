@@ -30,10 +30,13 @@ function App() {
         {/* <Nav /> */}
         <Routes>
 
-          <Route path='/' element={<Layout />} />
+          <Route path='/' element={<Layout />}>
+            <Route path='/chat/:id' element={<ChatRoom />} />
+
+          </Route>
+
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/chat/:id' element={<ChatRoom />} />
 
 
           {/* <Route path='/' element={<Home />} /> */}
