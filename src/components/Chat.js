@@ -34,22 +34,56 @@ const ChatRoom = () => {
     }
   }, [data]);
 
-  useEffect(() => {
-    const connectWebSocket = () => {
-      ws.current = new WebSocket(`${URL}/ws?user_id=${userID}&from_id=${uid}`);
-      ws.current.onmessage = (event) => {
-        try {
-          const msg = JSON.parse(event.data);
-          setMessages(prev => [...prev, msg]);
-        } catch (error) {
-          console.error('Error parsing message:', error);
+
+  const showNotification = (msg) => {
+    if (Notification.permission === "granted") {
+      new Notification(userMap[msg.user_id] || "New Message", {
+        body: msg.content,
+        icon: "/chat-icon.png" // Optional: Add an icon
+      });
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          new Notification(userMap[msg.user_id] || "New Message", {
+            body: msg.content,
+            icon: "/chat-icon.png"
+          });
         }
-      };
-      ws.current.onclose = () => setTimeout(connectWebSocket, 3000);
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (Notification.permission !== "granted") {
+      Notification.requestPermission();
+    }
+  }, []);
+  
+
+useEffect(() => {
+  const connectWebSocket = () => {
+    ws.current = new WebSocket(`${URL}/ws?user_id=${userID}&from_id=${uid}`);
+
+    ws.current.onmessage = (event) => {
+      try {
+        const msg = JSON.parse(event.data);
+        setMessages(prev => [...prev, msg]);
+
+        // Show notification if the message is from another user
+        if (msg.user_id !== Number(uid)) {
+          showNotification(msg);
+        }
+      } catch (error) {
+        console.error('Error parsing message:', error);
+      }
     };
-    connectWebSocket();
-    return () => ws.current?.close();
-  }, [userID]);
+
+    ws.current.onclose = () => setTimeout(connectWebSocket, 3000);
+  };
+
+  connectWebSocket();
+  return () => ws.current?.close();
+}, [userID]);
 
   // const sendMessage = () => {
   //   if (input.trim() !== '' && ws.current?.readyState === WebSocket.OPEN) {
