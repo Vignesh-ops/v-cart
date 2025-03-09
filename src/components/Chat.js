@@ -27,9 +27,11 @@ const ChatRoom = () => {
     acc[user.id] = user.username;
     return acc;
   }, {});
-
+let isCurrentUser = 0
   useEffect(() => {
     if (data && Array.isArray(data)) {
+       isCurrentUser = data.some(dat => dat.from_id == uid); // Checks if any message is from the current user
+
       setMessages(data);
     }
   }, [data]);
@@ -63,7 +65,7 @@ const ChatRoom = () => {
 useEffect(() => {
   const connectWebSocket = () => {
     ws.current = new WebSocket(`${URL}/ws?user_id=${userID}&from_id=${uid}`);
-
+console.log(isCurrentUser,'currentusr')
     ws.current.onmessage = (event) => {
       try {
         const msg = JSON.parse(event.data);
@@ -72,6 +74,9 @@ useEffect(() => {
         // Show notification if the message is from another user
         if (msg.user_id !== Number(uid)) {
           showNotification(msg);
+        } else{
+          isCurrentUser = true
+
         }
       } catch (error) {
         console.error('Error parsing message:', error);
@@ -108,6 +113,7 @@ useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+
   return (
     <Paper elevation={3} sx={{ maxWidth: 500, mx: 'auto', my: 4, p: 2, borderRadius: 2 }}>
       <Typography variant="h6" color="#1976d2" align="center" gutterBottom>
@@ -115,12 +121,25 @@ useEffect(() => {
       </Typography>
       <Box className='muiboxcustom' sx={{ height: 300, overflowY: 'auto', bgcolor: '#f5f5f5', p: 2, borderRadius: 2 }}>
         {messages.map((msg, index) => (
-          <Box key={index} sx={{ mb: 1, p: 1, bgcolor: msg.user_id === Number(uid) ? '#1976d2' : '#e3f2fd', color: msg.user_id === Number(uid) ? 'white' : 'black', borderRadius: 1, maxWidth: '80%', alignSelf: msg.user_id === Number(uid) ? 'flex-end' : 'flex-start', display: 'inline-block' }}>
-            <Typography variant="body2" fontWeight="bold">
-              {userMap[msg.user_id] || "Unknown User"}
-            </Typography>
-            <Typography variant="body1">{msg.content}</Typography>
-          </Box>
+        <Box 
+        key={index} 
+        sx={{ 
+          mb: 1, 
+          p: 1, 
+          bgcolor: msg.from_id === Number(uid) || isCurrentUser ? '#1976d2' : '#e3f2fd', 
+          color: msg.from_id === Number(uid) || isCurrentUser ? 'white' : 'black', 
+          borderRadius: 1, 
+          maxWidth: '80%', 
+          alignSelf: msg.from_id === Number(uid) || isCurrentUser ? 'flex-end' : 'flex-start', 
+          display: 'inline-block' 
+        }}
+      >
+        <Typography variant="body2" fontWeight="bold">
+          {userMap[msg.from_id] || userMap[msg.user_id]}
+        </Typography>
+        <Typography variant="body1">{msg.content}</Typography>
+      </Box>
+      
         ))}
         <div ref={messagesEndRef} />
       </Box>
