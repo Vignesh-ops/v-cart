@@ -14,7 +14,7 @@ export default function AboutSection() {
         </ul>
       </div>
       <img
-        src="https://images.unsplash.com/photo-1519864600265-abbf6ecb607d?auto=format&fit=crop&w=500&q=80"
+        src="https://thumbs.dreamstime.com/b/gym-24699087.jpg"
         alt="Gym"
         className="md:w-1/2 rounded-xl shadow-lg object-cover max-h-80"
       />
