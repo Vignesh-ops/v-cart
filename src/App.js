@@ -54,31 +54,31 @@ const GymWebsite = () => {
       {/* Navigation */}
       <nav className="bg-gray-800 text-white p-4 sticky top-0 z-50">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="text-2xl font-bold text-orange-500">Muscle Art Fitness</div>
+          <div className="text-2xl font-bold text-green-500">Muscle Art Fitness</div>
           <div className="flex space-x-4">
             {!user ? (
               <>
                 <button 
                   onClick={() => setCurrentView('landing')}
-                  className="hover:text-orange-500 transition-colors"
+                  className="hover:text-green-500 transition-colors"
                 >
                   Home
                 </button>
                 <button 
                   onClick={() => document.getElementById('plans').scrollIntoView({ behavior: 'smooth' })}
-                  className="hover:text-orange-500 transition-colors"
+                  className="hover:text-green-500 transition-colors"
                 >
                   Plans
                 </button>
                 <button 
                   onClick={() => setCurrentView('member-login')}
-                  className="hover:text-orange-500 transition-colors"
+                  className="hover:text-green-500 transition-colors"
                 >
                   Member Login
                 </button>
                 <button 
                   onClick={() => setCurrentView('admin-login')}
-                  className="hover:text-orange-500 transition-colors"
+                  className="hover:text-green-500 transition-colors"
                 >
                   Admin
                 </button>
@@ -88,7 +88,7 @@ const GymWebsite = () => {
                 <span>Welcome, {user.name}</span>
                 <button 
                   onClick={handleLogout}
-                  className="bg-orange-500 px-4 py-2 rounded hover:bg-orange-600 transition-colors"
+                  className="bg-green-500 px-4 py-2 rounded hover:bg-green-600 transition-colors"
                 >
                   Logout
                 </button>
@@ -124,7 +124,7 @@ const LandingPage = ({ onPlanSelect }) => {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-gray-900 to-black text-white py-20">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-500 to-red-500 bg-clip-text text-transparent">
             Muscle Art Fitness
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-300 max-w-2xl mx-auto">
@@ -132,7 +132,7 @@ const LandingPage = ({ onPlanSelect }) => {
           </p>
           <button 
             onClick={() => document.getElementById('plans').scrollIntoView({ behavior: 'smooth' })}
-            className="bg-orange-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition-all transform hover:scale-105"
+            className="bg-green-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-600 transition-all transform hover:scale-105"
           >
             Join Now
           </button>
@@ -152,7 +152,7 @@ const LandingPage = ({ onPlanSelect }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {['Experienced trainers', 'Flexible timings', 'Modern equipment', 'Affordable membership plans'].map((benefit, index) => (
                   <div key={index} className="flex items-center text-gray-300">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
                     {benefit}
                   </div>
                 ))}
@@ -160,7 +160,7 @@ const LandingPage = ({ onPlanSelect }) => {
             </div>
             <div className="flex-1">
               <div className="bg-gray-700 rounded-2xl p-4 shadow-2xl">
-                <div className="w-full h-64 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                <div className="w-full h-64 bg-gradient-to-br from-green-500 to-red-500 rounded-xl flex items-center justify-center">
                   <span className="text-white text-lg">Modern Gym Facility</span>
                 </div>
               </div>
@@ -177,15 +177,15 @@ const LandingPage = ({ onPlanSelect }) => {
             {membershipPlans.map((plan, index) => (
               <div 
                 key={plan.id}
-                className="bg-gray-800 rounded-2xl p-8 text-white hover:transform hover:scale-105 transition-all duration-300 cursor-pointer border-2 border-gray-700 hover:border-orange-500"
+                className="bg-gray-800 rounded-2xl p-8 text-white hover:transform hover:scale-105 transition-all duration-300 cursor-pointer border-2 border-gray-700 hover:border-green-500"
                 onClick={() => onPlanSelect(plan)}
               >
                 <div className="text-center mb-6">
-                  <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl">💪</span>
                   </div>
                   <h3 className="text-2xl font-bold">{plan.name}</h3>
-                  <div className="text-3xl font-bold text-orange-500 my-4">₹{plan.price}</div>
+                  <div className="text-3xl font-bold text-green-500 my-4">₹{plan.price}</div>
                   <p className="text-gray-400">{plan.duration}</p>
                 </div>
                 <ul className="space-y-3 mb-6">
@@ -196,7 +196,7 @@ const LandingPage = ({ onPlanSelect }) => {
                     </li>
                   ))}
                 </ul>
-                <button className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors">
+                <button className="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors">
                   Get Started
                 </button>
               </div>
@@ -264,7 +264,7 @@ const LoginView = ({ onLogin, type }) => {
             <label className="block text-gray-300 mb-2">Email</label>
             <input 
               type="email" 
-              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
+              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-green-500"
               placeholder="Enter your email"
               value={credentials.email}
               onChange={(e) => setCredentials({...credentials, email: e.target.value})}
@@ -275,7 +275,7 @@ const LoginView = ({ onLogin, type }) => {
             <label className="block text-gray-300 mb-2">Password</label>
             <input 
               type="password" 
-              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
+              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-green-500"
               placeholder="Enter your password"
               value={credentials.password}
               onChange={(e) => setCredentials({...credentials, password: e.target.value})}
@@ -284,7 +284,7 @@ const LoginView = ({ onLogin, type }) => {
           </div>
           <button 
             type="submit"
-            className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors"
+            className="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors"
           >
             Login
           </button>
@@ -324,7 +324,7 @@ const MemberDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="bg-gray-800 rounded-2xl p-6 text-white">
             <h3 className="text-lg font-semibold text-gray-400 mb-2">Membership Plan</h3>
-            <p className="text-2xl font-bold text-orange-500">{memberData.plan}</p>
+            <p className="text-2xl font-bold text-green-500">{memberData.plan}</p>
           </div>
           <div className="bg-gray-800 rounded-2xl p-6 text-white">
             <h3 className="text-lg font-semibold text-gray-400 mb-2">Payment Status</h3>
@@ -370,7 +370,7 @@ const MemberDashboard = () => {
                       </span>
                     </td>
                     <td className="py-4">
-                      <button className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors">
+                      <button className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
                         Download
                       </button>
                     </td>
@@ -417,7 +417,7 @@ const AdminDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="bg-gray-800 rounded-2xl p-6 text-white">
             <h3 className="text-lg font-semibold text-gray-400 mb-2">Total Members</h3>
-            <p className="text-3xl font-bold text-orange-500">{stats.totalMembers}</p>
+            <p className="text-3xl font-bold text-green-500">{stats.totalMembers}</p>
           </div>
           <div className="bg-gray-800 rounded-2xl p-6 text-white">
             <h3 className="text-lg font-semibold text-gray-400 mb-2">Paid Members</h3>
@@ -478,7 +478,7 @@ const AdminDashboard = () => {
                       <div className="text-sm text-gray-400">{member.phone}</div>
                     </td>
                     <td className="py-4">
-                      <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm">
+                      <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm">
                         {member.plan}
                       </span>
                     </td>
@@ -575,7 +575,7 @@ const PaymentPage = ({ plan, onPayment, paymentStatus }) => {
                   <label className="block text-gray-300 mb-2">Full Name</label>
                   <input 
                     type="text"
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-green-500"
                     placeholder="Enter your full name"
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
@@ -586,7 +586,7 @@ const PaymentPage = ({ plan, onPayment, paymentStatus }) => {
                   <label className="block text-gray-300 mb-2">Email</label>
                   <input 
                     type="email"
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-green-500"
                     placeholder="Enter your email"
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
@@ -597,7 +597,7 @@ const PaymentPage = ({ plan, onPayment, paymentStatus }) => {
                   <label className="block text-gray-300 mb-2">Phone</label>
                   <input 
                     type="tel"
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-green-500"
                     placeholder="Enter your phone number"
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
@@ -607,7 +607,7 @@ const PaymentPage = ({ plan, onPayment, paymentStatus }) => {
                 <div>
                   <label className="block text-gray-300 mb-2">Membership Plan</label>
                   <select 
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-green-500"
                     value={formData.plan}
                     onChange={(e) => setFormData({...formData, plan: e.target.value})}
                     required
@@ -620,7 +620,7 @@ const PaymentPage = ({ plan, onPayment, paymentStatus }) => {
                 </div>
                 <button 
                   type="submit"
-                  className="w-full bg-orange-500 text-white py-4 rounded-lg font-semibold text-lg hover:bg-orange-600 transition-colors"
+                  className="w-full bg-green-500 text-white py-4 rounded-lg font-semibold text-lg hover:bg-green-600 transition-colors"
                 >
                   Pay Now - ₹{plan?.price || ''}
                 </button>
@@ -633,7 +633,7 @@ const PaymentPage = ({ plan, onPayment, paymentStatus }) => {
               {plan && (
                 <div className="bg-gray-700 rounded-lg p-6 mb-6">
                   <h3 className="text-xl font-semibold text-white mb-4">{plan.name} Plan</h3>
-                  <div className="text-3xl font-bold text-orange-500 mb-4">₹{plan.price}</div>
+                  <div className="text-3xl font-bold text-green-500 mb-4">₹{plan.price}</div>
                   <ul className="space-y-3">
                     {plan.features.map((feature, index) => (
                       <li key={index} className="flex items-center text-gray-300">
