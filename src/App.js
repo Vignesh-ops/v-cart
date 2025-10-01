@@ -1,63 +1,38 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import Home from './Home';
-import Posts from './Posts';
-import About from './About';
-import { Routes, Route, Link, useParams } from 'react-router-dom';
-import Postpage from './Postpage';
-import Nav from './Nav';
-import Header from './Header';
-import Newpost from './Newpost';
-import api from './api/posts';
+import { useState } from 'react';
+import HeroSection from './components/HeroSection';
+import AboutSection from './components/AboutSection';
+import MembershipPlans from './components/MembershipPlans';
+import ContactSection from './components/ContactSection';
+import Footer from './components/Footer';
+import MemberDashboard from './components/MemberDashboard';
+import AdminDashboard from './components/AdminDashboard';
+import PaymentPage from './components/PaymentPage';
 
-import Editpost from './Editpost';
-import Footer from './Footer';
-import Login from './AuthPage/Login';
-import Register from './AuthPage/Register';
-import Layout from './components/Layout'
-import { DataProvider } from './context/DataContext';
-import SearchBar from './components/SearchBar';
-import ChatRoom from './components/Chat';
-
-
-function App() {
-
+export default function App() {
+  const [page, setPage] = useState('landing');
+  const [selectedPlan, setSelectedPlan] = useState(null);
 
   return (
-    <div className="App">
-      <DataProvider>
-        {/* <Header title="Share Zone" /> */}
-        {/* <Nav /> */}
-        <Routes>
-
-          <Route path='/' element={<Layout />}>
-            <Route path='/chat/:id' element={<ChatRoom />} />
-
-          </Route>
-
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-
-
-          {/* <Route path='/' element={<Home />} /> */}
-          {/* <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} /> */}
-          {/* <Route path='/about' element={<Footer />} /> */}
-
-          {/* <Route path='posts'>
-            <Route index element={<Newpost />} />
-            <Route path=':id' element={<Postpage />} />
-            <Route path='edit/:id' element={<Editpost />} />
-          </Route> */}
-        </Routes>
-        {/* <About /> */}
-
-      </DataProvider>
-
-
-
+    <div className="bg-gradient-to-b from-black to-gray-900 min-h-screen text-white">
+      {page === 'landing' && (
+        <>
+          <HeroSection onJoin={() => document.getElementById('membership').scrollIntoView({ behavior: 'smooth' })} setPage={setPage} />
+          <AboutSection />
+          <div id="membership">
+            <MembershipPlans setPage={setPage} setSelectedPlan={setSelectedPlan} />
+          </div>
+          <ContactSection />
+          <Footer />
+        </>
+      )}
+      {page === 'member' && <MemberDashboard setPage={setPage} />}
+      {page === 'admin' && <AdminDashboard setPage={setPage} />}
+      {page === 'payment' && (
+        <PaymentPage
+          plan={selectedPlan}
+          onBack={() => setPage('landing')}
+        />
+      )}
     </div>
   );
 }
-
-export default App;
